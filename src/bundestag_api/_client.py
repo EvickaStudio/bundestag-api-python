@@ -136,7 +136,7 @@ class BundestagAPI(SyncAPIClient):
         api_key = self.api_key
         if api_key is None:
             return {}
-        return {"Authorization": api_key}
+        return {"Authorization": f"ApiKey {api_key}"}
 
     @property
     @override
