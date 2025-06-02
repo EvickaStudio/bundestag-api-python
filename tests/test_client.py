@@ -1108,7 +1108,7 @@ class TestAsyncBundestagAPI:
     def test_validate_headers(self) -> None:
         client = AsyncBundestagAPI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("Authorization") == api_key
+        assert request.headers.get("Authorization") == f"ApiKey {api_key}"
 
         with update_env(**{"BUNDESTAG_API_API_KEY": Omit()}):
             client2 = AsyncBundestagAPI(base_url=base_url, api_key=None, _strict_response_validation=True)
