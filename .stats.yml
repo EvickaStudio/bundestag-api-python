@@ -1,0 +1,4 @@
+configured_endpoints: 16
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/evickastudio%2Fbundestag-api-5579fccffc97e1c5608b240d56d11bc8afbf87706af46e86e4af70d38f3eae18.yml
+openapi_spec_hash: 1f82ef2c862748426c0cc7604eb9dd01
+config_hash: 95306ed512b53279860e476a8875f64c
