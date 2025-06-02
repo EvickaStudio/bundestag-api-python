@@ -31,7 +31,7 @@ class PlenarprotokollResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/bundestag-api-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/EvickaStudio/bundestag-api-python#accessing-raw-response-data-eg-headers
         """
         return PlenarprotokollResourceWithRawResponse(self)
 
@@ -40,7 +40,7 @@ class PlenarprotokollResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/bundestag-api-python#with_streaming_response
+        For more information, see https://www.github.com/EvickaStudio/bundestag-api-python#with_streaming_response
         """
         return PlenarprotokollResourceWithStreamingResponse(self)
 
@@ -149,7 +149,7 @@ class AsyncPlenarprotokollResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/bundestag-api-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/EvickaStudio/bundestag-api-python#accessing-raw-response-data-eg-headers
         """
         return AsyncPlenarprotokollResourceWithRawResponse(self)
 
@@ -158,7 +158,7 @@ class AsyncPlenarprotokollResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/bundestag-api-python#with_streaming_response
+        For more information, see https://www.github.com/EvickaStudio/bundestag-api-python#with_streaming_response
         """
         return AsyncPlenarprotokollResourceWithStreamingResponse(self)
 
