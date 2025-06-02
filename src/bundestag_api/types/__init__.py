@@ -1,0 +1,47 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+from .person import Person as Person
+from .ressort import Ressort as Ressort
+from .urheber import Urheber as Urheber
+from .vorgang import Vorgang as Vorgang
+from .quadrant import Quadrant as Quadrant
+from .zuordnung import Zuordnung as Zuordnung
+from .aktivitaet import Aktivitaet as Aktivitaet
+from .bundesland import Bundesland as Bundesland
+from .deskriptor import Deskriptor as Deskriptor
+from .drucksache import Drucksache as Drucksache
+from .fundstelle import Fundstelle as Fundstelle
+from .vorgangsbezug import Vorgangsbezug as Vorgangsbezug
+from .drucksache_text import DrucksacheText as DrucksacheText
+from .plenarprotokoll import Plenarprotokoll as Plenarprotokoll
+from .vorgangsposition import Vorgangsposition as Vorgangsposition
+from .dokument_text_base import DokumentTextBase as DokumentTextBase
+from .list_response_base import ListResponseBase as ListResponseBase
+from .person_list_params import PersonListParams as PersonListParams
+from .vorgang_list_params import VorgangListParams as VorgangListParams
+from .person_list_response import PersonListResponse as PersonListResponse
+from .plenarprotokoll_text import PlenarprotokollText as PlenarprotokollText
+from .vorgang_list_response import VorgangListResponse as VorgangListResponse
+from .vorgangspositionbezug import Vorgangspositionbezug as Vorgangspositionbezug
+from .aktivitaet_list_params import AktivitaetListParams as AktivitaetListParams
+from .drucksache_list_params import DrucksacheListParams as DrucksacheListParams
+from .person_retrieve_params import PersonRetrieveParams as PersonRetrieveParams
+from .vorgang_retrieve_params import VorgangRetrieveParams as VorgangRetrieveParams
+from .aktivitaet_list_response import AktivitaetListResponse as AktivitaetListResponse
+from .drucksache_list_response import DrucksacheListResponse as DrucksacheListResponse
+from .aktivitaet_retrieve_params import AktivitaetRetrieveParams as AktivitaetRetrieveParams
+from .drucksache_retrieve_params import DrucksacheRetrieveParams as DrucksacheRetrieveParams
+from .drucksache_text_list_params import DrucksacheTextListParams as DrucksacheTextListParams
+from .plenarprotokoll_list_params import PlenarprotokollListParams as PlenarprotokollListParams
+from .vorgangsposition_list_params import VorgangspositionListParams as VorgangspositionListParams
+from .drucksache_text_list_response import DrucksacheTextListResponse as DrucksacheTextListResponse
+from .plenarprotokoll_list_response import PlenarprotokollListResponse as PlenarprotokollListResponse
+from .vorgangsposition_list_response import VorgangspositionListResponse as VorgangspositionListResponse
+from .drucksache_text_retrieve_params import DrucksacheTextRetrieveParams as DrucksacheTextRetrieveParams
+from .plenarprotokoll_retrieve_params import PlenarprotokollRetrieveParams as PlenarprotokollRetrieveParams
+from .plenarprotokoll_text_list_params import PlenarprotokollTextListParams as PlenarprotokollTextListParams
+from .vorgangsposition_retrieve_params import VorgangspositionRetrieveParams as VorgangspositionRetrieveParams
+from .plenarprotokoll_text_list_response import PlenarprotokollTextListResponse as PlenarprotokollTextListResponse
+from .plenarprotokoll_text_retrieve_params import PlenarprotokollTextRetrieveParams as PlenarprotokollTextRetrieveParams
