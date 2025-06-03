@@ -74,8 +74,6 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
-from datetime import datetime, date
-
 ## Nested params
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
@@ -86,29 +84,7 @@ from bundestag_api import BundestagAPI
 client = BundestagAPI()
 
 vorgangs = client.vorgang.list(
-    f={
-        "id": [0],
-        "aktualisiert": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-        "beratungsstand": [""],
-        "datum": date.fromisoformat("2019-12-27"),
-        "deskriptor": [""],
-        "dokumentart": "Drucksache",
-        "dokumentnummer": [""],
-        "drucksache": 0,
-        "drucksachetyp": "drucksachetyp",
-        "frage_nummer": [""],
-        "gesta": [""],
-        "initiative": [""],
-        "plenarprotokoll": 0,
-        "ressort_fdf": [""],
-        "sachgebiet": [""],
-        "titel": [""],
-        "urheber": [""],
-        "verkuendung_fundstelle": [""],
-        "vorgangstyp": [""],
-        "vorgangstyp_notation": [0],
-        "wahlperiode": [0],
-    },
+    f={},
 )
 print(vorgangs.f)
 ```
