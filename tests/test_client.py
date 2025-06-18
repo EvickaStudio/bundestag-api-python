@@ -24,7 +24,6 @@ from pydantic import ValidationError
 from bundestag_api import BundestagAPI, AsyncBundestagAPI, APIResponseValidationError
 from bundestag_api._types import Omit
 from bundestag_api._models import BaseModel, FinalRequestOptions
-from bundestag_api._constants import RAW_RESPONSE_HEADER
 from bundestag_api._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
 from bundestag_api._base_client import (
     DEFAULT_TIMEOUT,
@@ -732,22 +731,21 @@ class TestBundestagAPI:
 
     @mock.patch("bundestag_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: BundestagAPI) -> None:
         respx_mock.get("/vorgang").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.get("/vorgang", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}})
+            client.vorgang.with_streaming_response.list().__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("bundestag_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: BundestagAPI) -> None:
         respx_mock.get("/vorgang").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.get("/vorgang", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}})
-
+            client.vorgang.with_streaming_response.list().__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1556,26 +1554,25 @@ class TestAsyncBundestagAPI:
 
     @mock.patch("bundestag_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_timeout_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncBundestagAPI
+    ) -> None:
         respx_mock.get("/vorgang").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.get(
-                "/vorgang", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
-            )
+            await async_client.vorgang.with_streaming_response.list().__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("bundestag_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_status_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncBundestagAPI
+    ) -> None:
         respx_mock.get("/vorgang").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.get(
-                "/vorgang", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
-            )
-
+            await async_client.vorgang.with_streaming_response.list().__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
