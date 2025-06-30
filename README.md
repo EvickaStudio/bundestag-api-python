@@ -1,6 +1,6 @@
 # Bundestag API Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/bundestag_api.svg)](https://pypi.org/project/bundestag_api/)
+[![PyPI version](<https://img.shields.io/pypi/v/bundestag_api.svg?label=pypi%20(stable)>)](https://pypi.org/project/bundestag_api/)
 
 The Bundestag API Python library provides convenient access to the Bundestag API REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -20,7 +20,7 @@ pip install git+ssh://git@github.com/EvickaStudio/bundestag-api-python.git
 ```
 
 > [!NOTE]
-> Once this package is [published to PyPI](https://app.stainless.com/docs/guides/publish), this will become: `pip install --pre bundestag_api`
+> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install --pre bundestag_api`
 
 ## Usage
 
@@ -65,6 +65,37 @@ asyncio.run(main())
 
 Functionality between the synchronous and asynchronous clients is otherwise identical.
 
+### With aiohttp
+
+By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
+
+You can enable this by installing `aiohttp`:
+
+```sh
+# install from the production repo
+pip install 'bundestag_api[aiohttp] @ git+ssh://git@github.com/EvickaStudio/bundestag-api-python.git'
+```
+
+Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
+
+```python
+import os
+import asyncio
+from bundestag_api import DefaultAioHttpClient
+from bundestag_api import AsyncBundestagAPI
+
+
+async def main() -> None:
+    async with AsyncBundestagAPI(
+        api_key=os.environ.get("BUNDESTAG_API_API_KEY"),  # This is the default and can be omitted
+        http_client=DefaultAioHttpClient(),
+    ) as client:
+        vorgangs = await client.vorgang.list()
+
+
+asyncio.run(main())
+```
+
 ## Using types
 
 Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
@@ -73,8 +104,6 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 - Converting to a dictionary, `model.to_dict()`
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
-
-from datetime import datetime, date
 
 ## Nested params
 
@@ -86,29 +115,7 @@ from bundestag_api import BundestagAPI
 client = BundestagAPI()
 
 vorgangs = client.vorgang.list(
-    f={
-        "id": [0],
-        "aktualisiert": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-        "beratungsstand": [""],
-        "datum": date.fromisoformat("2019-12-27"),
-        "deskriptor": [""],
-        "dokumentart": "Drucksache",
-        "dokumentnummer": [""],
-        "drucksache": 0,
-        "drucksachetyp": "drucksachetyp",
-        "frage_nummer": [""],
-        "gesta": [""],
-        "initiative": [""],
-        "plenarprotokoll": 0,
-        "ressort_fdf": [""],
-        "sachgebiet": [""],
-        "titel": [""],
-        "urheber": [""],
-        "verkuendung_fundstelle": [""],
-        "vorgangstyp": [""],
-        "vorgangstyp_notation": [0],
-        "wahlperiode": [0],
-    },
+    f={},
 )
 print(vorgangs.f)
 ```
@@ -178,7 +185,7 @@ client.with_options(max_retries=5).vorgang.list()
 ### Timeouts
 
 By default requests time out after 1 minute. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
 from bundestag_api import BundestagAPI
