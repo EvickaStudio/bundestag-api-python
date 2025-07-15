@@ -80,7 +80,6 @@ pip install 'bundestag_api[aiohttp] @ git+ssh://git@github.com/EvickaStudio/bund
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
-import os
 import asyncio
 from bundestag_api import DefaultAioHttpClient
 from bundestag_api import AsyncBundestagAPI
@@ -88,7 +87,7 @@ from bundestag_api import AsyncBundestagAPI
 
 async def main() -> None:
     async with AsyncBundestagAPI(
-        api_key=os.environ.get("BUNDESTAG_API_API_KEY"),  # This is the default and can be omitted
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         vorgangs = await client.vorgang.list()
